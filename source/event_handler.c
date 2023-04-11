@@ -46,11 +46,11 @@ void register_event_handler(uint16_t id, void *context, event_handler_t handler)
     handlers_count++;
 }
 
-void send_event_to_handlers(uint16_t id, void *data)
+void send_event_to_handlers(uint16_t id, void *payload)
 {
     for (size_t i = 0; i < handlers_count; i++) {
         if (id == handlers[i].id) {
-            handlers[i].handler(id, handlers[i].context, data);
+            handlers[i].handler(id, handlers[i].context, payload);
         }
     }
 }

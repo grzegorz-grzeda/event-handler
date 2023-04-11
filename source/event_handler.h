@@ -24,10 +24,38 @@
 
 #include <stdint.h>
 
+/**
+ * @brief Event handler type
+ * 
+ * This is a callback pointer the the actual event handling code. 
+ * @param[in] id event ID
+ * @param[in] context pointer to some context passed during registration
+ * @param[in] payload pointer to some payload associated with the event ID
+*/
 typedef void (*event_handler_t)(uint16_t id, void *context, void *payload);
 
+/**
+ * @brief Register an new event handler
+ * 
+ * @param[in] id event ID that we are registering for
+ * @param[in] context pointer to some context for the event @ref handler
+ * @param[in] handler pointer to the actual event handling callback
+*/
 void register_event_handler(uint16_t id, void *context, event_handler_t handler);
 
-void send_event_to_handlers(uint16_t id, void *data);
+/**
+ * @brief Send event to handlers
+ * 
+ * It calls each handler registered for given event ID.
+ * @note This code is platform-agnostic. If this function was called from e.g. 
+ * - ISR
+ * - another thread
+ * It is the handlers job to cross thread/interrupt barriers correctly (e.g. through queues, semaphores etc.). 
+ * The handlers are being called in the `send_event_to_handlers` caller context.
+ * 
+ * @param[in] id event ID to be sent
+ * @param[in] payload pointer to possible payload associated with the event ID
+*/
+void send_event_to_handlers(uint16_t id, void *payload);
 
 #endif // EVENT_HANDLER_H
