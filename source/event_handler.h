@@ -23,6 +23,7 @@
 #define EVENT_HANDLER_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /**
  * @brief Event handler type
@@ -36,12 +37,17 @@ typedef void (*event_handler_t)(uint16_t id, void *context, void *payload);
 
 /**
  * @brief Register an new event handler
+ *
+ * @note This function is not thread safe! Consider registering all handlers in
+ * the initialization part of your project.
  * 
  * @param[in] id event ID that we are registering for
  * @param[in] context pointer to some context for the event @ref handler
  * @param[in] handler pointer to the actual event handling callback
+ * @return true if registration was successfull
+ * @return false if handler was invalid or no more memory to store it
 */
-void register_event_handler(uint16_t id, void *context, event_handler_t handler);
+bool register_event_handler(uint16_t id, void *context, event_handler_t handler);
 
 /**
  * @brief Send event to handlers
@@ -55,7 +61,9 @@ void register_event_handler(uint16_t id, void *context, event_handler_t handler)
  * 
  * @param[in] id event ID to be sent
  * @param[in] payload pointer to possible payload associated with the event ID
+ * @return true if at least one handler was executed for give event
+ * @return false otherwise
 */
-void send_event_to_handlers(uint16_t id, void *payload);
+bool send_event_to_handlers(uint16_t id, void *payload);
 
 #endif // EVENT_HANDLER_H

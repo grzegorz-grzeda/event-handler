@@ -35,22 +35,26 @@ struct handler {
 
 static size_t handlers_count = 0;
 
-void register_event_handler(uint16_t id, void *context, event_handler_t handler)
+bool register_event_handler(uint16_t id, void *context, event_handler_t handler)
 {
     if (!handler || (handlers_count >= EVENT_HANDLERS_MAX_HANDLERS_COUNT)) {
-        return;
+        return false;
     }
     handlers[handlers_count].handler = handler;
     handlers[handlers_count].context = context;
     handlers[handlers_count].id = id;
     handlers_count++;
+    return true;
 }
 
-void send_event_to_handlers(uint16_t id, void *payload)
+bool send_event_to_handlers(uint16_t id, void *payload)
 {
+    bool was_any_event_handler_executed = false;
     for (size_t i = 0; i < handlers_count; i++) {
         if (id == handlers[i].id) {
             handlers[i].handler(id, handlers[i].context, payload);
+            was_any_event_handler_executed = true;
         }
     }
+    return was_any_event_handler_executed;
 }
