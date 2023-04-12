@@ -35,7 +35,7 @@ FetchContent_MakeAvailable(cmocka)
 
 add_executable(test_event_handler ${CMAKE_CURRENT_SOURCE_DIR}/test_event_handler.c)
 
-target_compile_definitions(event_handler PRIVATE EVENT_HANDLERS_MAX_HANDLERS_COUNT=100)
+target_compile_definitions(event_handler PUBLIC EVENT_HANDLERS_MAX_HANDLERS_COUNT=5)
 target_link_libraries(test_event_handler PRIVATE event_handler cmocka-static)
 
 add_test(NAME test_event_handler COMMAND test_event_handler)
