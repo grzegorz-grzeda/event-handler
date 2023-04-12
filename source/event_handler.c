@@ -35,6 +35,11 @@ struct handler {
 
 static size_t handlers_count = 0;
 
+void initialize_event_handler(void)
+{
+    handlers_count = 0;
+}
+
 bool register_event_handler(uint16_t id, void *context, event_handler_t handler)
 {
     if (!handler || (handlers_count >= EVENT_HANDLERS_MAX_HANDLERS_COUNT)) {

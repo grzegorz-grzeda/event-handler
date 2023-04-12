@@ -42,6 +42,11 @@
 typedef void (*event_handler_t)(uint16_t id, void *context, void *payload);
 
 /**
+ * @brief Initialize the event handler
+*/
+void initialize_event_handler(void);
+
+/**
  * @brief Register an new event handler
  *
  * @note This function is not thread safe! Consider registering all handlers in

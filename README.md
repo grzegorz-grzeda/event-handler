@@ -2,6 +2,7 @@
 Simple event handling library in C.
 
 ## How it works?
+1. Initialize with `initialize_event_handler()`.
 1. Register your `event_handler_t` callback funcion, through `register_event_handler()`. Specify the event ID and
 maybe some context, which will be passed to the callback.
 1. Place in code the `send_event_to_handlers()` call. Specify the event ID and maybe pass some additional payload.
