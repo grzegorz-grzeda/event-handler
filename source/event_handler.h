@@ -26,6 +26,12 @@
 #include <stdbool.h>
 
 /**
+ * @defgroup event_handler Event Handler
+ * Simple and efficient C library for handling events
+ * @{
+*/
+
+/**
  * @brief Event handler type
  * 
  * This is a callback pointer the the actual event handling code. 
@@ -65,5 +71,9 @@ bool register_event_handler(uint16_t id, void *context, event_handler_t handler)
  * @return false otherwise
 */
 bool send_event_to_handlers(uint16_t id, void *payload);
+
+/**
+ * @}
+*/
 
 #endif // EVENT_HANDLER_H
