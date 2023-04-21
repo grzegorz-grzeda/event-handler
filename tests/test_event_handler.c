@@ -114,21 +114,15 @@ static void send_event_multiple_event_handlers_test(void **state)
     assert_true(send_event_to_handlers(event_id_1, NULL));
 }
 
-static void try_to_register_more_handlers_than_possible_test(void **state)
-{
-    for (uint16_t i = 0; i < EVENT_HANDLERS_MAX_HANDLERS_COUNT; i++) {
-        assert_true(register_event_handler(i, NULL, test_event_handler));
-    }
-    assert_false(register_event_handler(1000, NULL, test_event_handler));
-}
-
 static void register_one_handler_to_many_event_ids_test(void **state)
 {
-    for (uint16_t i = 0; i < EVENT_HANDLERS_MAX_HANDLERS_COUNT; i++) {
+    const uint16_t max_count = 20;
+
+    for (uint16_t i = 0; i < max_count; i++) {
         assert_true(register_event_handler(i, NULL, test_event_handler));
     }
 
-    for (uint16_t i = 0; i < EVENT_HANDLERS_MAX_HANDLERS_COUNT; i++) {
+    for (uint16_t i = 0; i < max_count; i++) {
         uint8_t payload[2];
         expect_function_call(test_event_handler);
         expect_value(test_event_handler, id, i);
@@ -174,7 +168,6 @@ int main(int argc, char **argv)
         cmocka_unit_test_setup(send_event_handler_with_payload_test, test_set_up),
         cmocka_unit_test_setup(send_event_handler_with_context_and_payload_test, test_set_up),
         cmocka_unit_test_setup(send_event_multiple_event_handlers_test, test_set_up),
-        cmocka_unit_test_setup(try_to_register_more_handlers_than_possible_test, test_set_up),
         cmocka_unit_test_setup(register_one_handler_to_many_event_ids_test, test_set_up),
         cmocka_unit_test_setup(register_many_handlers_to_one_event_id_test, test_set_up),
     };

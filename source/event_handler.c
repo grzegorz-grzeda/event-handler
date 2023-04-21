@@ -20,46 +20,54 @@
  * SOFTWARE.
  */
 #include "event_handler.h"
+#include "simple_list.h"
 #include <stddef.h>
+#include <stdlib.h>
 
-#ifndef EVENT_HANDLERS_MAX_HANDLERS_COUNT
-#error "EVENT_HANDLERS_MAX_HANDLERS_COUNT not defined!"
-#define EVENT_HANDLERS_MAX_HANDLERS_COUNT (0)
-#endif
-
-struct handler {
-    event_handler_t handler;
+typedef struct event_handler_entry {
     void *context;
+    event_handler_t handler;
     uint16_t id;
-} handlers[EVENT_HANDLERS_MAX_HANDLERS_COUNT];
+} event_handler_entry_t;
 
-static size_t handlers_count = 0;
+static simple_list_t *event_handlers;
 
 void initialize_event_handler(void)
 {
-    handlers_count = 0;
+    event_handlers = create_simple_list();
 }
 
 bool register_event_handler(uint16_t id, void *context, event_handler_t handler)
 {
-    if (!handler || (handlers_count >= EVENT_HANDLERS_MAX_HANDLERS_COUNT)) {
+    if (!handler) {
         return false;
     }
-    handlers[handlers_count].handler = handler;
-    handlers[handlers_count].context = context;
-    handlers[handlers_count].id = id;
-    handlers_count++;
+    event_handler_entry_t *entry = calloc(1, sizeof(event_handler_entry_t));
+    if (!entry) {
+        return false;
+    }
+    entry->context = context;
+    entry->handler = handler;
+    entry->id = id;
+    append_to_simple_list(event_handlers, entry);
     return true;
+}
+
+static int event_handler_entry_filter(const void *current_entry, const void *event_id)
+{
+    uint16_t id = *(uint16_t *) event_id;
+    event_handler_entry_t *entry = (event_handler_entry_t *) current_entry;
+    return !(id == entry->id);
 }
 
 bool send_event_to_handlers(uint16_t id, void *payload)
 {
     bool was_any_event_handler_executed = false;
-    for (size_t i = 0; i < handlers_count; i++) {
-        if (id == handlers[i].id) {
-            handlers[i].handler(id, handlers[i].context, payload);
-            was_any_event_handler_executed = true;
-        }
+    for (simple_list_iterator_t *it = simple_list_begin_filtered(event_handlers, &id, event_handler_entry_filter); it;
+         it = simple_list_next_filtered(it, &id, event_handler_entry_filter)) {
+        event_handler_entry_t *entry = get_from_simple_list_iterator(it);
+        entry->handler(id, entry->context, payload);
+        was_any_event_handler_executed = true;
     }
     return was_any_event_handler_executed;
 }

@@ -27,7 +27,7 @@
 
 /**
  * @defgroup event_handler Event Handler
- * Simple and efficient C library for handling events
+ * @brief Simple and efficient C library for handling events
  * @{
 */
 
