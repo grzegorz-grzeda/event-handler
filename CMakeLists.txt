@@ -21,7 +21,7 @@
 # SOFTWARE.
 cmake_minimum_required(VERSION 3.22)
 
-project(event_handler LANGUAGES C VERSION 1.0.2)
+project(event_handler LANGUAGES C VERSION 1.0.3)
 add_library(${PROJECT_NAME})
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/source)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libraries)
@@ -29,6 +29,5 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libraries)
 target_link_libraries(${PROJECT_NAME} PRIVATE containers)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    enable_testing()
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 endif()

@@ -19,22 +19,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include(FetchContent)
-FetchContent_Declare(
-  cmocka
-  GIT_REPOSITORY https://git.cryptomilk.org/projects/cmocka.git
-  GIT_TAG        cmocka-1.1.5
-  GIT_SHALLOW    1
-)
-set(WITH_STATIC_LIB ON CACHE BOOL "CMocka: Build with a static library" FORCE)
-set(WITH_CMOCKERY_SUPPORT OFF CACHE BOOL "CMocka: Install a cmockery header" FORCE)
-set(WITH_EXAMPLES OFF CACHE BOOL "CMocka: Build examples" FORCE)
-set(UNIT_TESTING OFF CACHE BOOL "CMocka: Build with unit testing" FORCE)
-set(PICKY_DEVELOPER OFF CACHE BOOL "CMocka: Build with picky developer flags" FORCE)
-FetchContent_MakeAvailable(cmocka)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/simple_unit_tests)
 
-add_executable(test_event_handler ${CMAKE_CURRENT_SOURCE_DIR}/test_event_handler.c)
-
-target_link_libraries(test_event_handler PRIVATE event_handler cmocka-static)
-
-add_test(NAME test_event_handler COMMAND test_event_handler)
+add_simple_unit_test(event_hanlder ${CMAKE_CURRENT_SOURCE_DIR}/test_event_handler.c event_handler)
