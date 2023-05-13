@@ -16,11 +16,11 @@ jobs:
     - name: Checkout the `event-handler` library
       uses: actions/checkout@v3
 
-    - name: Checkout the `simple-unit-test` library
+    - name: Checkout the `simple-unit-tests` library
       uses: actions/checkout@v3
       with:
         repository: grzegorz-grzeda/simple-unit-tests
-        path: ./libraries/simple-unit-test
+        path: ./libraries/simple-unit-tests
 
     - name: Checkout the `containers` library
       uses: actions/checkout@v3
