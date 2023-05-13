@@ -21,6 +21,9 @@ jobs:
         repository: grzegorz-grzeda/embuild
         path: ./embuild
 
+    - run: ls
+    - run: pwd
+
     - name: Configure project with embuild
       run: ./embuild/embuild
 
