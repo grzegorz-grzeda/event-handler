@@ -16,7 +16,6 @@ jobs:
     - uses: actions/checkout@v3
       with:
         repository: grzegorz-grzeda/embuild
-        path: ./embuild
 
     - name: Configure project with embuild
       run: ./embuild/embuild
