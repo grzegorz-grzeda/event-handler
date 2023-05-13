@@ -24,7 +24,7 @@ jobs:
     - name: Configure project with embuild
       run: ./embuild/embuild
 
-    - run: ls
+    - run: ls -al libraries
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
