@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include "event_handler.h"
-#include "simple_list.h"
+#include "event-handler.h"
+#include "simple-list.h"
 #include <stddef.h>
 #include <stdlib.h>
 

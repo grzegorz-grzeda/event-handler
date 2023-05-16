@@ -19,4 +19,4 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-add_simple_unit_test(event_handler ${CMAKE_CURRENT_SOURCE_DIR}/test_event_handler.c event_handler)
+add_simple_unit_test(event-handler ${CMAKE_CURRENT_SOURCE_DIR}/test-event-handler.c event-handler)

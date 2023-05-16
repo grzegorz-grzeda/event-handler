@@ -4,7 +4,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-#include "event_handler.h"
+#include "event-handler.h"
 
 static void test_event_handler(uint16_t id, void *context, void *payload)
 {
