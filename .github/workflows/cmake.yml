@@ -16,17 +16,17 @@ jobs:
     - name: Checkout the `event-handler` library
       uses: actions/checkout@v3
 
-    - name: Checkout the `simple-unit-tests` library
-      uses: actions/checkout@v3
-      with:
-        repository: grzegorz-grzeda/simple-unit-tests
-        path: ./libraries/simple-unit-tests
-
     - name: Checkout the `containers` library
       uses: actions/checkout@v3
       with:
         repository: grzegorz-grzeda/containers
         path: ./libraries/containers
+
+    - name: Checkout the `simple-unit-tests` package
+      uses: actions/checkout@v3
+      with:
+        repository: grzegorz-grzeda/simple-unit-tests
+        path: ./packages/simple-unit-tests
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}

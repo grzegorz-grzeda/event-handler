@@ -21,7 +21,7 @@
 # SOFTWARE.
 cmake_minimum_required(VERSION 3.22)
 
-project(event-handler LANGUAGES C VERSION 1.1.0)
+project(event-handler LANGUAGES C VERSION 1.1.1)
 add_library(${PROJECT_NAME})
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/source)
 
@@ -29,7 +29,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE containers)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     enable_testing()
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libraries/simple-unit-tests)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/packages/simple-unit-tests)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libraries/containers)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 endif()
