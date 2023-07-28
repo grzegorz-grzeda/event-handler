@@ -22,6 +22,11 @@ static void test_another_event_handler(uint16_t id, void *context, void *payload
     check_expected(payload);
 }
 
+static void register_invalid_handler(void **state)
+{
+    assert_false(register_event_handler(0, NULL, NULL));
+}
+
 static void send_event_no_handlers_registered(void **state)
 {
     const uint16_t event_id = 22;
@@ -161,6 +166,7 @@ static int test_set_up(void **state)
 int main(int argc, char **argv)
 {
     const struct CMUnitTest tests[] = {
+        cmocka_unit_test_setup(register_invalid_handler, test_set_up),
         cmocka_unit_test_setup(send_event_no_handlers_registered, test_set_up),
         cmocka_unit_test_setup(send_event_other_handler_registered_test, test_set_up),
         cmocka_unit_test_setup(send_event_handler_registered_test, test_set_up),
