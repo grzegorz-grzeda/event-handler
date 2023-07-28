@@ -1,4 +1,6 @@
 # event-handler
+[![CMake](https://github.com/grzegorz-grzeda/event-handler/actions/workflows/cmake.yml/badge.svg)](https://github.com/grzegorz-grzeda/event-handler/actions/workflows/cmake.yml)
+
 Simple event handling library in C.
 
 ## How it works?
