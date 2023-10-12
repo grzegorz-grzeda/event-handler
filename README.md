@@ -3,6 +3,8 @@
 
 Simple event handling library in C.
 
+This is a [G2EPM](https://github.com/grzegorz-grzeda/g2epm) library.
+
 ## How it works?
 1. Initialize with `initialize_event_handler()`.
 1. Register your `event_handler_t` callback funcion, through `register_event_handler()`. Specify the event ID and
@@ -12,6 +14,9 @@ All registered to this event callbacks will be invoked in the context of the cal
 1. This is a small and simple library, so you have to ensure, that callbacks can access external resources in a safe
 manner. When calling `send_event_to_handlers()` from an ISR or other thread, the callback has to have e.g. a queue, 
 mutex, semaphore, etc. mechanism to cross the thread barrier safely.
+
+## Initialize
+Download dependencies by running `g2epm download` in the project root.
 
 ## Run tests
 Just run `./test.sh`.
