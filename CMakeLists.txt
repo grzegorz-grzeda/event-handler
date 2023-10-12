@@ -26,11 +26,11 @@ project(event-handler LANGUAGES C VERSION 1.1.1)
 add_library(${PROJECT_NAME})
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/packages/simple-unit-tests)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libraries/containers)
+    include(${CMAKE_CURRENT_LIST_DIR}/lib/atomic-tests/cmake/atomic-tests.cmake)
+    add_subdirectory(lib/containers)
 endif()
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/source)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+add_subdirectory(source)
+add_subdirectory(tests)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE containers)

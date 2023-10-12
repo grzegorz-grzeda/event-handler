@@ -3,7 +3,7 @@
 build/
 _build/
 documentation
-libraries/
+lib/
 packages/
 
 # Prerequisites
