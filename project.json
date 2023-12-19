@@ -1,9 +1,10 @@
 {
+    "name": "event-handler",
+    "description": "Simple event handling library in C",
+    "license": "mit",
+    "author": "Grzegorz Grzęda",
     "libraries": [
         "containers",
         "atomic-tests"
-    ],
-    "packages": [
-        "simple-documentation-library"
     ]
 }
